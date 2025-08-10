@@ -162,22 +162,17 @@ function promptYesNo(question) {
  * Install the bundled greply CLI script locally.
  * - Copies this package's bundled greply.sh
  * - Writes to destDir/fileName (default $HOME/.local/bin/greply)
- * - Prompts before overwrite unless force=true
  * - chmod +x on the installed file
  *
  * @param {Object} [opts]
  * @param {string} [opts.destDir] Destination directory (default $HOME/.local/bin)
  * @param {string} [opts.fileName="greply"] Installed filename
- * @param {boolean} [opts.force=false] Overwrite without prompting
- * @param {boolean} [opts.nonInteractive=false] If true and overwrite needed without force, throw instead of prompting
  * @returns {Promise<{ installed: boolean, path: string, skipped?: boolean, reason?: string }>} Install result
  */
 export async function install(opts = {}) {
   const defaultUserBin = path.join(os.homedir(), ".local", "bin");
   const destDir = opts.destDir || defaultUserBin;
   const fileName = opts.fileName || "greply";
-  const force = Boolean(opts.force);
-  const nonInteractive = Boolean(opts.nonInteractive);
 
   const destinationPath = path.resolve(destDir, fileName);
   const bundledCandidate = decodeURIComponent(path.resolve(path.dirname(new URL(import.meta.url).pathname), "..", "greply.sh"));
@@ -194,16 +189,10 @@ export async function install(opts = {}) {
     // proceed; write will surface a clearer error
   }
 
-  if (await fileExists(destinationPath) && !force) {
-    if (nonInteractive) {
-      const error = new Error(`Destination exists: ${destinationPath}. Set force=true to overwrite.`);
+  if (await fileExists(destinationPath)) {
+    const error = new Error(`Destination exists: ${destinationPath}.`);
       error.code = "EEXIST";
       throw error;
-    }
-    const approved = await promptYesNo(`File exists at ${destinationPath}. Overwrite? [y/N]`);
-    if (!approved) {
-      return { installed: false, skipped: true, reason: "user_declined", path: destinationPath };
-    }
   }
 
   try {
