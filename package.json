@@ -1,0 +1,37 @@
+{
+  "name": "greply",
+  "version": "0.0.1",
+  "description": "Node wrapper around the 'greply' bash CLI for use in MCP servers and apps.",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./src/index.js"
+    }
+  },
+  "files": [
+    "src",
+    "greply.sh",
+    "LICENSE",
+    "README.md"
+  ],
+  "main": "./src/index.js",
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "cli",
+    "grep",
+    "search",
+    "mcp",
+    "wrapper"
+  ],
+  "license": "MIT",
+  "author": "",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "scripts": {
+    "test": "node test.js"
+  }
+}
