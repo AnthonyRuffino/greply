@@ -9,6 +9,7 @@ BEFORE=0
 CASE_FLAG="-i"
 WORD_FLAG=""
 RECURSIVE=0
+COLOR_OPT="--color=always"   # default: colored output
 PATH_ARG=""
 PATTERN=""
 MATCHER="-E"   # default: extended regex; switch to -F when requested
@@ -22,6 +23,7 @@ usage() {
   echo "  -F, --fixed-strings  String literal matching (no regex)"
   echo "  -A <num>             Number of lines after match (default: 0)"
   echo "  -B <num>             Number of lines before match (default: 0)"
+  echo "  -nc, --no-color          Disable colored output"
   exit 1
 }
 
@@ -30,10 +32,11 @@ while [[ $# -gt 0 ]]; do
   case "$1" in
     -c|--match-case) CASE_FLAG=""; shift ;;
     -w|--whole-word) WORD_FLAG="-w"; shift ;;
-    -R|--recursive)  RECURSIVE=1; shift ;;          # <- capital R
-    -F|--fixed-strings) MATCHER="-F"; shift ;;      # <- select -F, don't add alongside -E
+    -R|--recursive) RECURSIVE=1; shift ;;
+    -F|--fixed-strings) MATCHER="-F"; shift ;; # <- select -F, don't add alongside -E
     -A) AFTER="$2"; shift 2 ;;
     -B) BEFORE="$2"; shift 2 ;;
+    -nc|--no-color)  COLOR_OPT="--color=never"; shift ;;
     -*) echo "Unknown option: $1"; usage ;;
     *)
       if [[ -z "$PATTERN" ]]; then
@@ -51,7 +54,7 @@ done
 [[ -z "$PATTERN" || -z "$PATH_ARG" ]] && usage
 
 # Build grep options
-GREP_OPTS=("$MATCHER" -n --color=always -A "$AFTER" -B "$BEFORE")
+GREP_OPTS=("$MATCHER" -n "$COLOR_OPT" -A "$AFTER" -B "$BEFORE")
 [[ -n "$CASE_FLAG" ]] && GREP_OPTS+=("$CASE_FLAG")
 [[ -n "$WORD_FLAG" ]] && GREP_OPTS+=("$WORD_FLAG")
 

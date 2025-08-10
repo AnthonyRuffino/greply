@@ -1,8 +1,15 @@
 #!/bin/bash
 
 # Usage: ./install.sh [install_method] [version]
-# install_method: "wget" (direct download) or "npm" (clone + npm pack)
-# version: optional tag version for npm mode (e.g., "0.1.0", "1.0.0") - defaults to "main"
+# install_method: "http" (direct download) or "npm" (clone + npm pack)
+
+# For npm mode - the version defaults to "main": https://github.com/AnthonyRuffino/greply/tree/main
+# version: (optional) canonical tagged release version: https://github.com/AnthonyRuffino/greply/releases/tag/{release}
+
+# For nttp mode - the version defaults to "main": https://raw.githubusercontent.com/AnthonyRuffino/greply/refs/heads/main/greply.sh
+# version: (optional) canonical tagged release version: https://raw.githubusercontent.com/AnthonyRuffino/greply/refs/tags/{release}/greply.sh
+
+
 
 INSTALL_METHOD=${1:-http}
 VERSION=${2:-}
