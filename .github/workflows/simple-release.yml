@@ -25,11 +25,11 @@ jobs:
           if [ -n "$PREVIOUS_TAG" ]; then
             echo "Generating changelog from $PREVIOUS_TAG to ${{ github.ref_name }}"
             # Get commits between tags, excluding the tag commit itself
-            CHANGELOG=$(git log --pretty=format:"- %s (%h)" $PREVIOUS_TAG..HEAD --not ${{ github.ref_name }})
+            CHANGELOG=$(git log --pretty=format:"- %s (%h)" $PREVIOUS_TAG..HEAD )
           else
             echo "No previous tag found, using all commits"
             # Get all commits except the current tag
-            CHANGELOG=$(git log --pretty=format:"- %s (%h)" --reverse --not ${{ github.ref_name }})
+            CHANGELOG=$(git log --pretty=format:"- %s (%h)" --reverse )
           fi
           
           # Clean up empty lines and format properly
