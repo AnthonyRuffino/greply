@@ -62,10 +62,6 @@ if [ "$INSTALL_METHOD" = "npm" ]; then
     #rm -rf /tmp/greply-install
     echo "clean up done"  
 elif [ "$INSTALL_METHOD" = "http" ]; then
-    echo "Installing via wget/curl from GitHub"
-    
-    # Create target directory
-    mkdir -p ~/.local/bin
     
     # Check if target file exists and prompt user
     if [ -f ~/.local/bin/grepl ]; then
@@ -75,6 +71,10 @@ elif [ "$INSTALL_METHOD" = "http" ]; then
             exit 0
         fi
     fi
+
+    echo "Installing via wget/curl from GitHub"
+    # Create target directory
+    mkdir -p ~/.local/bin
     
     # Try wget first, fallback to curl if wget not available
     if command -v wget >/dev/null 2>&1; then
