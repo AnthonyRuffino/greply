@@ -73,8 +73,25 @@ elif [ "$INSTALL_METHOD" = "http" ]; then
     # Create target directory
     mkdir -p ~/.local/bin
     
-    # Try wget first, fallback to curl if wget not available
-    if command -v wget >/dev/null 2>&1; then
+    # Try curl first, fallback to wget if curl not available
+    if command -v curl >/dev/null 2>&1; then
+        echo "Using curl to download..."
+        # Download based on version parameter
+        if [ -n "$VERSION" ]; then
+            echo "Downloading version: $VERSION"
+            curl -f -sSL -o ~/.local/bin/greply "https://raw.githubusercontent.com/AnthonyRuffino/greply/refs/tags/$VERSION/greply.sh"
+            if [ $? -ne 0 ]; then
+                echo "Error: Failed to download version $VERSION - tag may not exist"
+                exit 1
+            fi
+        else
+            curl -f -sSL -o ~/.local/bin/greply "https://raw.githubusercontent.com/AnthonyRuffino/greply/refs/heads/main/greply.sh"
+            if [ $? -ne 0 ]; then
+                echo "Error: Failed to download main branch"
+                exit 1
+            fi
+        fi
+    elif command -v wget >/dev/null 2>&1; then
         echo "Using wget to download..."
         # Download based on version parameter
         if [ -n "$VERSION" ]; then
@@ -91,23 +108,6 @@ elif [ "$INSTALL_METHOD" = "http" ]; then
                 exit 1
             fi
             wget -O ~/.local/bin/greply "https://raw.githubusercontent.com/AnthonyRuffino/greply/refs/heads/main/greply.sh"
-        fi
-    elif command -v curl >/dev/null 2>&1; then
-        echo "Using curl to download..."
-        # Download based on version parameter
-        if [ -n "$VERSION" ]; then
-            echo "Downloading version: $VERSION"
-            curl -f -sSL -o ~/.local/bin/greply "https://raw.githubusercontent.com/AnthonyRuffino/greply/refs/tags/$VERSION/greply.sh"
-            if [ $? -ne 0 ]; then
-                echo "Error: Failed to download version $VERSION - tag may not exist"
-                exit 1
-            fi
-        else
-            curl -f -sSL -o ~/.local/bin/greply "https://raw.githubusercontent.com/AnthonyRuffino/greply/refs/heads/main/greply.sh"
-            if [ $? -ne 0 ]; then
-                echo "Error: Failed to download main branch"
-                exit 1
-            fi
         fi
     else
         echo "Error: Neither wget nor curl is available. Please install one of them and try again."
