@@ -70,8 +70,9 @@ else
     mkdir -p ~/.local/bin
     
     # Check if target file exists and prompt user
-    if [ -f ~/.local/bin/greply ]; then
-        read -p "File ~/.local/bin/greply already exists. Overwrite? [y/N]: "
+    TARGET_FILE="$HOME/.local/bin/grepl"
+    if [ -f "$TARGET_FILE" ]; then
+        read -p "$TARGET_FILE already exists. Overwrite? [y/N]: " REPLY
         if [[ ! $REPLY =~ ^[Yy]$ ]]; then
             echo "Installation cancelled."
             exit 0
