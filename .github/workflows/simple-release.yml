@@ -39,6 +39,11 @@ jobs:
           echo "changelog<<EOF" >> $GITHUB_OUTPUT
           echo "$CHANGELOG" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
+          
+          # Store previous tag for comparison link
+          echo "previous_tag<<EOF" >> $GITHUB_OUTPUT
+          echo "$PREVIOUS_TAG" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Create Release
         uses: actions/create-release@v1
@@ -56,5 +61,7 @@ jobs:
             ---
             
             *Release created automatically from tag ${{ github.ref_name }}*
+            
+            ${{ steps.changelog.outputs.previous_tag && format('<p><a href="https://github.com/{0}/compare/{1}...{2}">See changes from {1} to {2}</a></p>', github.repository, steps.changelog.outputs.previous_tag, github.ref_name) || '' }}
           draft: false
           prerelease: false
