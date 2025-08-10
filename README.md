@@ -141,12 +141,12 @@ wget -O - https://raw.githubusercontent.com/AnthonyRuffino/greply/main/install.s
 
 #### Install specific version
 ```bash
-wget -O - https://raw.githubusercontent.com/AnthonyRuffino/greply/main/install.sh | bash -s wget 0.1.4
+wget -O - https://raw.githubusercontent.com/AnthonyRuffino/greply/main/install.sh | bash -s wget 0.1.5
 ```
 
 #### Install via npm method with version
 ```bash
-wget -O - https://raw.githubusercontent.com/AnthonyRuffino/greply/main/install.sh | bash -s npm 0.1.4
+wget -O - https://raw.githubusercontent.com/AnthonyRuffino/greply/main/install.sh | bash -s npm 0.1.5
 ```
 
 ### Options → greply flags
