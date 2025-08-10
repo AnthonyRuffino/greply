@@ -9,6 +9,12 @@ VERSION=${2:-}
 
 echo "Installing greply..."
 
+# Check if target file exists and prompt user
+if [ -f ~/.local/bin/greply ]; then
+    echo "Installation cancelled, file ~/.local/bin/greply already exists."
+    exit 0
+fi
+
 if [ "$INSTALL_METHOD" = "npm" ]; then
     
     echo "Installing via npm pack (clone + build)"
@@ -59,15 +65,9 @@ if [ "$INSTALL_METHOD" = "npm" ]; then
     })()
     '
     # Cleanup
-    #rm -rf /tmp/greply-install
+    rm -rf /tmp/greply-install
     echo "clean up done"  
 elif [ "$INSTALL_METHOD" = "http" ]; then
-    
-    # Check if target file exists and prompt user
-    if [ -f ~/.local/bin/greply ]; then
-        echo "Installation cancelled, file ~/.local/bin/greply already exists."
-        exit 0
-    fi
 
     echo "Installing via wget/curl from GitHub"
     # Create target directory
