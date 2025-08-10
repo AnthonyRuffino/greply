@@ -74,7 +74,7 @@ function buildArgs(opts) {
  * @param {boolean} [opts.suppressErrors=false] if true, return stdout/stderr even on failure
  * @returns {Promise<{ stdout: string, stderr: string }>}
  */
-export async function rungreply(opts) {
+export async function greplyRun(opts) {
   const greplyCmd = opts?.greplyCmd || DEFAULT_greply_CMD;
   const args = buildArgs(opts);
 

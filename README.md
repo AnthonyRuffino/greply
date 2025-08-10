@@ -28,9 +28,9 @@ pnpm add greply
 ## Usage
 
 ```js
-import { rungreply, greplyHelp } from "greply";
+import { greplyRun, greplyHelp } from "greply";
 
-const { stdout } = await rungreply({
+const { stdout } = await greplyRun({
   query: "TODO",
   target: ".",
   before: 1,
@@ -56,14 +56,14 @@ Uses relative path 'node_modules/greply/README.md' directly.
 node -e '
   import("greply")
     .then(m => 
-      m.rungreply({ query: "m.rungreply", target: "README.md", fixedStrings: true })
+      m.greplyRun({ query: "m.greplyRun", target: "README.md", fixedStrings: true })
         .then(r => console.log(r.stdout))
     )
 '
 ```
 ##### Output:
 ```
-README.md:46:      m.rungreply({ query: "rungreply", target: "README.md", fixedStrings: true })
+README.md:46:      m.greplyRun({ query: "greplyRun", target: "README.md", fixedStrings: true })
 README.md:53:...
 ```
 
@@ -78,7 +78,7 @@ node -e '
       import("node:path")
         .then(p => p.resolve(process.cwd(), "README.md"))
         .then(f => 
-          g.rungreply({ query: "g.rungreply", target: f, fixedStrings: true })
+          g.greplyRun({ query: "g.greplyRun", target: f, fixedStrings: true })
         )
         .then(r => console.log(r.stdout))
     )
@@ -87,7 +87,7 @@ node -e '
 
 ##### Output:
 ```
-README.md:68:          g.rungreply({ query: "PATH", target: f, fixedStrings: true })
+README.md:68:          g.greplyRun({ query: "PATH", target: f, fixedStrings: true })
 README.md:77:...
 ```
 
