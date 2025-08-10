@@ -30,6 +30,8 @@ if [ "$INSTALL_METHOD" = "npm" ]; then
         echo "Checking out version: $VERSION"
         if ! git checkout -q "$VERSION"; then
             echo "Error: Failed to checkout version $VERSION"
+            rm -rf /tmp/greply-install
+            echo "clean up done"
             exit 1
         fi
     fi
