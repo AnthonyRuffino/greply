@@ -53,7 +53,7 @@ Uses relative path 'node_modules/greply/README.md' directly.
 
 ##### Command:
 ```sh
-$ node -e '
+node -e '
   import("greply")
     .then(m => 
       m.rungreply({ query: "m.rungreply", target: "README.md", fixedStrings: true })
@@ -72,7 +72,7 @@ Uses path.resolve(process.cwd(), 'node_modules/greply/README.md') to create an a
 
 ##### Command:
 ```sh
-$ node -e '
+node -e '
   import("greply")
     .then(g => 
       import("node:path")
@@ -99,8 +99,8 @@ git clone git@github.com:AnthonyRuffino/greply.git
 cd greply
 npm pack
 cd ..
-npm init -y
-npm i greply/greply-0.0.1.tgz
+cp greply/greply-0.0.1.tgz .
+npm i greply-0.0.1.tgz
 ```
 
 
