@@ -1,6 +1,6 @@
 {
   "name": "greply",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Node wrapper around the 'greply' bash CLI for use in MCP servers and apps.",
   "type": "module",
   "exports": {
