@@ -70,7 +70,7 @@ else
     mkdir -p ~/.local/bin
     
     # Check if target file exists and prompt user
-    TARGET_FILE="$HOME/.local/bin/grepl"
+    TARGET_FILE="$HOME/.local/bin/greply"
     if [ -f "$TARGET_FILE" ]; then
         read -p "$TARGET_FILE already exists. Overwrite? [y/N]: " REPLY
         if [[ ! $REPLY =~ ^[Yy]$ ]]; then
