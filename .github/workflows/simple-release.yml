@@ -65,3 +65,17 @@ jobs:
             ${{ steps.changelog.outputs.previous_tag && format('<p><a href="https://github.com/{0}/compare/{1}...{2}">See changes from {1} to {2}</a></p>', github.repository, steps.changelog.outputs.previous_tag, github.ref_name) || '' }}
           draft: false
           prerelease: false
+      
+      - name: Setup Node.js for NPM
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.18.0'
+          registry-url: 'https://registry.npmjs.org'
+      
+      - name: Authenticate with NPM
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+      
+      - name: Publish to NPM
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
