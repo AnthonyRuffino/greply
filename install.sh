@@ -68,9 +68,8 @@ elif [ "$INSTALL_METHOD" = "http" ]; then
     mkdir -p ~/.local/bin
     
     # Check if target file exists and prompt user
-    TARGET_FILE="$HOME/.local/bin/greply"
-    if [ -f "$TARGET_FILE" ]; then
-        read -p "$TARGET_FILE already exists. Overwrite? [y/N]: " REPLY
+    if [ -f ~/.local/bin/grepl ]; then
+        read -p "File ~/.local/bin/grepl already exists. Overwrite? [y/N]: "
         if [[ ! $REPLY =~ ^[Yy]$ ]]; then
             echo "Installation cancelled."
             exit 0
