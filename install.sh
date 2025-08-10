@@ -64,12 +64,9 @@ if [ "$INSTALL_METHOD" = "npm" ]; then
 elif [ "$INSTALL_METHOD" = "http" ]; then
     
     # Check if target file exists and prompt user
-    if [ -f ~/.local/bin/grepl ]; then
-        read -p "File ~/.local/bin/grepl already exists. Overwrite? [y/N]: "
-        if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-            echo "Installation cancelled."
-            exit 0
-        fi
+    if [ -f ~/.local/bin/greply ]; then
+        echo "Installation cancelled, file ~/.local/bin/greply already exists."
+        exit 0
     fi
 
     echo "Installing via wget/curl from GitHub"
@@ -87,26 +84,26 @@ elif [ "$INSTALL_METHOD" = "http" ]; then
                 echo "Error: Failed to download version $VERSION - tag may not exist"
                 exit 1
             fi
-            wget -O greply "https://raw.githubusercontent.com/AnthonyRuffino/greply/refs/tags/$VERSION/greply.sh"
+            wget -O ~/.local/bin/greply "https://raw.githubusercontent.com/AnthonyRuffino/greply/refs/tags/$VERSION/greply.sh"
         else
             if ! wget --spider -q "https://raw.githubusercontent.com/AnthonyRuffino/greply/refs/heads/main/greply.sh"; then
                 echo "Error: Failed to download main branch"
                 exit 1
             fi
-            wget -O greply "https://raw.githubusercontent.com/AnthonyRuffino/greply/refs/heads/main/greply.sh"
+            wget -O ~/.local/bin/greply "https://raw.githubusercontent.com/AnthonyRuffino/greply/refs/heads/main/greply.sh"
         fi
     elif command -v curl >/dev/null 2>&1; then
         echo "Using curl to download..."
         # Download based on version parameter
         if [ -n "$VERSION" ]; then
             echo "Downloading version: $VERSION"
-            curl -f -sSL -o greply "https://raw.githubusercontent.com/AnthonyRuffino/greply/refs/tags/$VERSION/greply.sh"
+            curl -f -sSL -o ~/.local/bin/greply "https://raw.githubusercontent.com/AnthonyRuffino/greply/refs/tags/$VERSION/greply.sh"
             if [ $? -ne 0 ]; then
                 echo "Error: Failed to download version $VERSION - tag may not exist"
                 exit 1
             fi
         else
-            curl -f -sSL -o greply "https://raw.githubusercontent.com/AnthonyRuffino/greply/refs/heads/main/greply.sh"
+            curl -f -sSL -o ~/.local/bin/greply "https://raw.githubusercontent.com/AnthonyRuffino/greply/refs/heads/main/greply.sh"
             if [ $? -ne 0 ]; then
                 echo "Error: Failed to download main branch"
                 exit 1
@@ -117,8 +114,7 @@ elif [ "$INSTALL_METHOD" = "http" ]; then
         exit 1
     fi
     
-    chmod +x greply
-    mv greply ~/.local/bin/greply
+    chmod +x ~/.local/bin/greply
     echo "✅ greply installed to ~/.local/bin/greply"
 else
     echo "Error: Unsupported install method: $INSTALL_METHOD"
