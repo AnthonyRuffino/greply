@@ -2,7 +2,7 @@
 
 # Usage: ./install.sh [install_method] [version]
 # install_method: "wget" (direct download) or "npm" (clone + npm pack)
-# version: optional tag version for npm mode (e.g., "0.0.1", "v1.0.0") - defaults to "main"
+# version: optional tag version for npm mode (e.g., "0.1.0", "1.0.0") - defaults to "main"
 
 INSTALL_METHOD=${1:-http}
 VERSION=${2:-}

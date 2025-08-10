@@ -1,6 +1,6 @@
 {
   "name": "greply",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Node wrapper around the 'greply' bash CLI for use in MCP servers and apps.",
   "type": "module",
   "exports": {
@@ -26,12 +26,16 @@
     "wrapper"
   ],
   "license": "MIT",
-  "author": "",
+  "author": "Anthony Ruffino",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "git+https://github.com/AnthonyRuffino/greply.git"
   },
   "scripts": {
     "test": "node test.js"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/AnthonyRuffino/greply/issues"
+  },
+  "homepage": "https://github.com/AnthonyRuffino/greply#readme"
 }

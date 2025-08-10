@@ -99,8 +99,8 @@ git clone git@github.com:AnthonyRuffino/greply.git
 cd greply
 npm pack
 cd ..
-cp greply/greply-0.0.1.tgz .
-npm i greply-0.0.1.tgz
+cp greply/greply-0.1.0.tgz .
+npm i greply-0.1.0.tgz
 ```
 
 
@@ -131,7 +131,7 @@ Download and run the install script in one command:
 
 #### Install Script Parameters:
 - **First parameter**: `wget` (direct download) or `npm` (clone + build)
-- **Second parameter**: version tag (optional, e.g., "0.0.1", "0.1.0",  "1.0.0")
+- **Second parameter**: version tag (optional, e.g., "0.1.0", "1.0.0")
 - **Defaults**: `wget` method, latest from main branch if no version specified
 
 #### Install latest from main branch
@@ -141,12 +141,12 @@ wget -O - https://raw.githubusercontent.com/AnthonyRuffino/greply/main/install.s
 
 #### Install specific version
 ```bash
-wget -O - https://raw.githubusercontent.com/AnthonyRuffino/greply/main/install.sh | bash -s wget 0.0.1
+wget -O - https://raw.githubusercontent.com/AnthonyRuffino/greply/main/install.sh | bash -s wget 0.1.0
 ```
 
 #### Install via npm method with version
 ```bash
-wget -O - https://raw.githubusercontent.com/AnthonyRuffino/greply/main/install.sh | bash -s npm 0.0.1
+wget -O - https://raw.githubusercontent.com/AnthonyRuffino/greply/main/install.sh | bash -s npm 0.1.0
 ```
 
 ### Options → greply flags
