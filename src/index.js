@@ -38,7 +38,8 @@ function buildArgs(opts) {
     recursive,
     wholeWord,
     matchCase,
-    fixedStrings
+    fixedStrings,
+    noColor
   } = opts;
 
   if (!query || typeof query !== "string" || !query.trim()) {
@@ -52,6 +53,7 @@ function buildArgs(opts) {
   if (wholeWord)    cliArgs.push("-w");
   if (matchCase)    cliArgs.push("-c");
   if (fixedStrings) cliArgs.push("-F");
+  if (noColor)      cliArgs.push("--no-color");
 
   // Important: execFile separates args safely (no shell interpolation).
   cliArgs.push(query, path.resolve(process.cwd(), target));
@@ -71,6 +73,7 @@ function buildArgs(opts) {
  * @param {boolean} [opts.wholeWord] -w
  * @param {boolean} [opts.matchCase] -c
  * @param {boolean} [opts.fixedStrings] -F
+ * @param {boolean} [opts.noColor]   --no-color
  * @param {boolean} [opts.suppressErrors=false] if true, return stdout/stderr even on failure
  * @returns {Promise<{ stdout: string, stderr: string }>}
  */
